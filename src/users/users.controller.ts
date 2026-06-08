@@ -1,4 +1,16 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -7,7 +19,10 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return {
+      data: this.usersService.findAll(),
+      message: this.usersService.getMessage(),
+    };
   }
 
   @Get('employees')
@@ -40,7 +55,6 @@ export class UsersController {
   @Get('search2')
   findQuery2(@Query() query: any) {
     return {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       query,
     };
   }
@@ -49,6 +63,26 @@ export class UsersController {
   findUserById(@Param('id') id: string) {
     return {
       id,
+    };
+  }
+
+  @Post()
+  createUser(@Body() body: any) {
+    return body;
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body: any) {
+    return {
+      id,
+      body,
+    };
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return {
+      message: `User dengan id ${id} berhasil dihapus`,
     };
   }
 }

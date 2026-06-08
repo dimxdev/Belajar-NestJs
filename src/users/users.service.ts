@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { GreetingService } from 'src/greeting/greeting.service';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    private readonly greetingService: GreetingService,
+    private readonly loggerService: LoggerService,
+  ) {}
+
   findAll() {
     return [
       {
@@ -76,5 +83,9 @@ export class UsersService {
       email: 'dimas@example.com',
       role: 'Software Engineer',
     };
+  }
+
+  getMessage() {
+    return this.greetingService.sayHello('Dimas');
   }
 }
