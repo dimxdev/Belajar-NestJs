@@ -7,5 +7,6 @@ import { LoggerService } from 'src/logger/logger.service';
 @Module({
   controllers: [UsersController],
   providers: [UsersService, GreetingService, LoggerService],
+  exports: [UsersService],
 })
 export class UsersModule {}
