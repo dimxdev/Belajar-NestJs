@@ -12,6 +12,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -66,10 +67,10 @@ export class UsersController {
     };
   }
 
-  @Post()
-  createUser(@Body() body: any) {
-    return body;
-  }
+  // @Post()
+  // createUser(@Body() body: any) {
+  //   return body;
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() body: any) {
@@ -84,5 +85,10 @@ export class UsersController {
     return {
       message: `User dengan id ${id} berhasil dihapus`,
     };
+  }
+
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return createUserDto;
   }
 }
